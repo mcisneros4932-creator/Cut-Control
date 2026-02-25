@@ -1,7 +1,100 @@
 <!DOCTYPE html>
 <html>
-  <head>
-    <meta http-equiv="refresh" content="0; url=Oilfield_Cut_Master_Plan_PDA.html">
-  </head>
-  <body></body>
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cut Control v2</title>
+<link rel="manifest" href="manifest.json">
+<style>
+body { font-family: Arial; background:#111; color:#fff; margin:0; padding:20px; }
+h1 { text-align:center; }
+.tabs button { padding:10px 20px; margin:5px; border:none; cursor:pointer; }
+.active { background:#0f0; color:#000; }
+.section { margin-top:20px; padding:15px; background:#1e1e1e; border-radius:8px; }
+label { display:block; margin:8px 0; }
+.toggle { margin-top:10px; }
+</style>
+</head>
+<body>
+
+<h1>Cut Control v2</h1>
+
+<div class="tabs">
+<button onclick="switchShift('days')" id="daysBtn" class="active">Days</button>
+<button onclick="switchShift('nights')" id="nightsBtn">Nights</button>
+</div>
+
+<div class="section" id="schedule"></div>
+
+<div class="section">
+<h3>Non‑Negotiables</h3>
+<label><input type="checkbox"> 215g Protein</label>
+<label><input type="checkbox"> Lift Complete</label>
+<label><input type="checkbox"> 8k+ Steps</label>
+<label><input type="checkbox"> Electrolytes</label>
+<label><input type="checkbox"> 6+ Hours Sleep</label>
+</div>
+
+<script>
+const data = {
+days: {
+wake:"3:45 AM",
+sleep:"8:45 PM",
+supplements:[
+"LMNT",
+"Vitamin D3 + K2",
+"Creatine",
+"Glucosamine",
+"Glutathione",
+"L‑Carnitine",
+"Magnesium (pre‑bed)",
+"Zoloft 50mg",
+"Fenofibrate 145mg",
+"Atorvastatin 40mg",
+"Lisinopril 20mg",
+"Vascepa 4g",
+"Peptides (AOD / CJC / Ipam)"
+]
+},
+nights: {
+wake:"1:00 PM",
+sleep:"6:30 AM",
+supplements:[
+"LMNT",
+"Vitamin D3 + K2",
+"Creatine",
+"Glucosamine",
+"Glutathione",
+"L‑Carnitine",
+"Magnesium (pre‑bed)",
+"Zoloft 50mg",
+"Fenofibrate 145mg",
+"Atorvastatin 40mg",
+"Lisinopril 20mg",
+"Vascepa 4g",
+"Peptides (AOD / CJC / Ipam)"
+]
+}
+};
+
+function switchShift(shift){
+document.getElementById("daysBtn").classList.remove("active");
+document.getElementById("nightsBtn").classList.remove("active");
+document.getElementById(shift+"Btn").classList.add("active");
+
+let html = `<h3>Wake: ${data[shift].wake}</h3>
+<h3>Sleep: ${data[shift].sleep}</h3>
+<h3>Supplements</h3>`;
+
+data[shift].supplements.forEach(s=>{
+html += `<label><input type="checkbox"> ${s}</label>`;
+});
+
+document.getElementById("schedule").innerHTML = html;
+}
+
+switchShift("days");
+</script>
+
+</body>
 </html>
